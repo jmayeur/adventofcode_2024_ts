@@ -1,9 +1,9 @@
 {
     "include": [
-        "./src/**/*"
+        "./src/**/*", ".eslintrc.json"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules", "build"
     ],
     "compilerOptions": {
         "target": "ES2022",
@@ -23,7 +23,9 @@
         "noUnusedParameters": true,
         "noImplicitAny": false,
         "noImplicitThis": false,
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        "baseUrl": "./src",
+        "strict": true
     },
     "ts-node": {
         "esm": true,

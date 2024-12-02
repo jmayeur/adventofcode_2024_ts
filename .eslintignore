@@ -1,0 +1,7 @@
+build/
+
+*.config.cjs
+.eslintrc.cjs
+.prettierrc.json
+tsconfig.json
+tsconfig.eslint.json

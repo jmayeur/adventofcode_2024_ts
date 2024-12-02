@@ -1,0 +1,18 @@
+{
+    "files": ["src/**/*.ts"],
+        "formats": [{
+            "name": "stylish",
+            "output": "console"
+        }, {
+            "name": "json",
+            "output": "file",
+            "path": "reports/eslint/eslint.json"
+        }, {
+            "name": "html",
+            "output": "file",
+            "path": "reports/eslint/eslint.html"
+        }],
+            "cliEngineConfig": {
+        "extensions": [".ts"]
+    }
+}

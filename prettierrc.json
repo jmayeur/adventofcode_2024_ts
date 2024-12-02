@@ -8,10 +8,10 @@
     "overrides": [
         {
             "files": [
-                "*.ts"
+                "tsconfig.json"
             ],
             "options": {
-                "parser": "typescript"
+                "trailingComma": "none"
             }
         }
     ]
