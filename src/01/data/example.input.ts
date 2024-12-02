@@ -1,4 +1,4 @@
-export const example_input = `3   4
+export const exampleInput = `3   4
 4   3
 2   5
 1   3

@@ -1,10 +1,10 @@
 import { Day } from '../types/day';
-import { input, example_input } from './data/index';
+import { input, exampleInput } from './data/index';
 import { Result } from '../types/result';
 
-const parseData = (input: string): number[][] => {
-    return input.split('\n').map(v => {
-        return v.split(' ').map(v => parseInt(v));
+const parseData = (rawData: string): number[][] => {
+    return rawData.split('\n').map(v => {
+        return v.split(' ').map(v1 => parseInt(v1));
     });
 };
 
@@ -32,8 +32,9 @@ const isSafe = (report: number[]): boolean => {
 };
 
 export class Day2 implements Day {
+
     async partOne(dataSetFlag: string): Promise<Result> {
-        const rawInput = dataSetFlag === 'example' ? example_input : input;
+        const rawInput = dataSetFlag === 'example' ? exampleInput : input;
         const ts = performance.now();
         const data = parseData(rawInput);
         // Begin Solution
@@ -49,8 +50,9 @@ export class Day2 implements Day {
             time: performance.now() - ts
         }
     }
+
     async partTwo(dataSetFlag: string): Promise<Result> {
-        const rawInput = dataSetFlag === 'example' ? example_input : input;
+        const rawInput = dataSetFlag === 'example' ? exampleInput : input;
         const ts = performance.now();
         const data = parseData(rawInput);
         // Begin Solution
@@ -68,7 +70,6 @@ export class Day2 implements Day {
                 return acc;
 
             }
-            return acc;
         }, 0);
         // End Solution
         return {

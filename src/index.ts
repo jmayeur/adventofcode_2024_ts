@@ -2,7 +2,7 @@ import { Day1 } from "./01/index";
 import { Day2 } from "./02/index";
 import { Day3 } from "./03/index";
 
-const [,,day, part, dataSetFlag] = process.argv;
+const [, , day, part, dataSetFlag] = process.argv;
 
 switch (day) {
     case '1': {

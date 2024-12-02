@@ -1,9 +1,9 @@
 import { Day } from '../types/day';
-import { input, example_input } from './data/index';
+import { input, exampleInput } from './data/index';
 import { Result } from '../types/result';
 
-const parseData = (input: string): { a: number[], b: number[] } => {
-    return input.split('\n').reduce((acc, line) => {
+const parseData = (rawData: string): { a: number[], b: number[] } => {
+    return rawData.split('\n').reduce((acc, line) => {
         const [a, b] = line.split('   ');
         acc.a.push(parseInt(a));
         acc.b.push(parseInt(b));
@@ -12,15 +12,16 @@ const parseData = (input: string): { a: number[], b: number[] } => {
 };
 
 export class Day3 implements Day {
+
     async partOne(dataSetFlag: string): Promise<Result> {
-        const rawInput = dataSetFlag === 'example' ? example_input : input;
+        const rawInput = dataSetFlag === 'example' ? exampleInput : input;
         const ts = performance.now();
         const data = parseData(rawInput);
         // Begin Solution
-        const a = data.a.sort((a, b) => a - b);
-        const b = data.b.sort((a, b) => a - b);
-        const result = a.reduce((acc, a, i) => {
-            return acc + Math.abs(a - b[i])
+        const a = data.a.sort((a1, b1) => a1 - b1);
+        const b = data.b.sort((a2, b2) => a2 - b2);
+        const result = a.reduce((acc, v, i) => {
+            return acc + Math.abs(v - b[i])
         }, 0);
         // End Solution
         return {
@@ -28,8 +29,9 @@ export class Day3 implements Day {
             time: performance.now() - ts
         }
     }
+
     async partTwo(dataSetFlag: string): Promise<Result> {
-        const rawInput = dataSetFlag === 'example' ? example_input : input;
+        const rawInput = dataSetFlag === 'example' ? exampleInput : input;
         const ts = performance.now();
         const data = parseData(rawInput);
         // Begin Solution
