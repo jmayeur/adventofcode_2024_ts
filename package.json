@@ -16,8 +16,8 @@
         "eslint": "~8.56.0",
         "eslint-config-airbnb-typescript": "^18.0.0",
         "eslint-config-prettier": "~9.1",
-        "eslint-plugin-jest": "~28.9",
         "eslint-output": "^3.0.1",
+        "eslint-plugin-jest": "~28.9",
         "eslint-plugin-prettier": "^5.1.3",
         "husky": "^9.1.7",
         "lint-staged": "^15.2.10",
@@ -34,10 +34,17 @@
         "get-results": "npm run build && npm start",
         "build:watch": "tsc -w -p tsconfig.json",
         "lint": "eslint-output src/**/*.ts",
+        "lint-fix": "eslint src/**/*.ts --fix",
         "prettier": "prettier --config .prettierrc --write .",
         "prepare": "husky"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    
     "lint-staged": {
-        "*.{ts,mts}": "eslint --cache --fix"
+        "*": "npm run lint-fix"
     }
 }

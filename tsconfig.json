@@ -1,9 +1,9 @@
 {
     "include": [
-        "./src/**/*", ".eslintrc.json"
+        "./src/*","./src/**/*", ".eslintrc.js"
     ],
     "exclude": [
-        "node_modules", "build"
+        "*.config.*", "./build", "./reports/"
     ],
     "compilerOptions": {
         "target": "ES2022",
@@ -11,7 +11,7 @@
         "lib": ["ES2022"],
         "moduleResolution": "Node",
         "rootDir": ".",
-        "outDir": "build",
+        "outDir": "./build/",
         "allowSyntheticDefaultImports": true,
         "importHelpers": true,
         "alwaysStrict": true,
@@ -24,6 +24,7 @@
         "noImplicitAny": false,
         "noImplicitThis": false,
         "strictNullChecks": false,
+        "types": ["node"],
         "baseUrl": "./src",
         "strict": true
     },
