@@ -2,29 +2,46 @@ import { Day } from "../types/day";
 import { input, exampleInput } from "./data/index";
 import { Result } from "../types/result";
 
-const parseData = (rawData: string): { a: number[]; b: number[] } => {
-  return rawData.split("\n").reduce(
-    (acc, line) => {
-      const [a, b] = line.split("   ");
-      acc.a.push(parseInt(a));
-      acc.b.push(parseInt(b));
-      return acc;
-    },
-    { a: [] as number[], b: [] as number[] }
-  );
+let enabled = true;
+const convert = (str: string): { a: number; b: number } => {
+  if (str === "do()") {
+    enabled = true;
+    return { a: 0, b: 0 };
+  } else if (str === "don't()") {
+    enabled = false;
+    return { a: 0, b: 0 };
+  }
+  if (!enabled) {
+    return { a: 0, b: 0 };
+  }
+  const matches = str.match(/mul\((\d{1,3}),(\d{1,3})\)/);
+  if (!matches || matches.length < 3) {
+    return { a: 0, b: 0 };
+  }
+  return {
+    a: parseInt(matches[1], 10),
+    b: parseInt(matches[2], 10),
+  };
+};
+
+const parseData = (
+  rawData: string,
+  obeyFlags: boolean
+): { a: number; b: number }[] => {
+  const regEx = obeyFlags
+    ? /mul\([^mul]+?\)|do\(\)|don't\(\)/g
+    : /mul\([^mul]+?\)/g;
+  const matches = rawData.match(regEx);
+  return matches.map(convert);
 };
 
 export class Day3 implements Day {
   async partOne(dataSetFlag: string): Promise<Result> {
     const rawInput = dataSetFlag === "example" ? exampleInput : input;
     const ts = performance.now();
-    const data = parseData(rawInput);
+    const data = parseData(rawInput, false);
     // Begin Solution
-    const a = data.a.sort((a1, b1) => a1 - b1);
-    const b = data.b.sort((a2, b2) => a2 - b2);
-    const result = a.reduce((acc, v, i) => {
-      return acc + Math.abs(v - b[i]);
-    }, 0);
+    const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
     // End Solution
     return {
       result: result.toString(),
@@ -35,22 +52,9 @@ export class Day3 implements Day {
   async partTwo(dataSetFlag: string): Promise<Result> {
     const rawInput = dataSetFlag === "example" ? exampleInput : input;
     const ts = performance.now();
-    const data = parseData(rawInput);
+    const data = parseData(rawInput, true);
     // Begin Solution
-    const bMap = data.b.reduce((acc: { [key: number]: number }, b) => {
-      if (acc[b]) {
-        acc[b] += 1;
-      } else {
-        acc[b] = 1;
-      }
-      return acc;
-    }, {});
-    const result = data.a.reduce((acc, a) => {
-      if (bMap[a]) {
-        return acc + a * bMap[a];
-      }
-      return acc;
-    }, 0);
+    const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
     // End Solution
     return {
       result: result.toString(),
