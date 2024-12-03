@@ -1,4 +1,4 @@
 export interface Result {
-    result: string;
-    time: number;
+  result: string;
+  time: number;
 }
