@@ -1,4 +1,4 @@
-import { Day } from "../types/day";
+import { Runner } from "../types/runner";
 import { input, exampleInput } from "./data/index";
 import { Result } from "../types/result";
 
@@ -37,50 +37,46 @@ const isSafe = (report: number[]): boolean => {
   }, true);
 };
 
-export class Day2 implements Day {
-  async partOne(dataSetFlag: string): Promise<Result> {
-    const rawInput = dataSetFlag === "example" ? exampleInput : input;
-    const ts = performance.now();
-    const data = parseData(rawInput);
-    // Begin Solution
-    const result = data.reduce((acc, v) => {
-      if (isSafe(v)) {
-        return acc + 1;
+export const partOne: Runner = async (dataSetFlag: string): Promise<Result> => {
+  const rawInput = dataSetFlag === "example" ? exampleInput : input;
+  const ts = performance.now();
+  const data = parseData(rawInput);
+  // Begin Solution
+  const result = data.reduce((acc, v) => {
+    if (isSafe(v)) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+  // End Solution
+  return {
+    result: result.toString(),
+    time: performance.now() - ts,
+  };
+};
+
+export const partTwo: Runner = async (dataSetFlag: string): Promise<Result> => {
+  const rawInput = dataSetFlag === "example" ? exampleInput : input;
+  const ts = performance.now();
+  const data = parseData(rawInput);
+  // Begin Solution
+  const result = data.reduce((acc, v) => {
+    if (isSafe(v)) {
+      return acc + 1;
+    } else {
+      for (let i = 0; i < v.length; i++) {
+        const modReport = [...v];
+        modReport.splice(i, 1);
+        if (isSafe(modReport)) {
+          return acc + 1;
+        }
       }
       return acc;
-    }, 0);
-    // End Solution
-    return {
-      result: result.toString(),
-      time: performance.now() - ts,
-    };
-  }
-
-  async partTwo(dataSetFlag: string): Promise<Result> {
-    const rawInput = dataSetFlag === "example" ? exampleInput : input;
-    const ts = performance.now();
-    const data = parseData(rawInput);
-    // Begin Solution
-    const result = data.reduce((acc, v) => {
-      if (isSafe(v)) {
-        return acc + 1;
-      } else {
-        for (let i = 0; i < v.length; i++) {
-          const modReport = [...v];
-          modReport.splice(i, 1);
-          if (isSafe(modReport)) {
-            return acc + 1;
-          }
-        }
-        return acc;
-      }
-    }, 0);
-    // End Solution
-    return {
-      result: result.toString(),
-      time: performance.now() - ts,
-    };
-  }
-
-  name = "Day 2";
-}
+    }
+  }, 0);
+  // End Solution
+  return {
+    result: result.toString(),
+    time: performance.now() - ts,
+  };
+};

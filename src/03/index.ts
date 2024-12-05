@@ -1,4 +1,4 @@
-import { Day } from "../types/day";
+import { Runner } from "../types/runner";
 import { input, exampleInput } from "./data/index";
 import { Result } from "../types/result";
 
@@ -35,32 +35,28 @@ const parseData = (
   return matches.map(convert);
 };
 
-export class Day3 implements Day {
-  async partOne(dataSetFlag: string): Promise<Result> {
-    const rawInput = dataSetFlag === "example" ? exampleInput : input;
-    const ts = performance.now();
-    const data = parseData(rawInput, false);
-    // Begin Solution
-    const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
-    // End Solution
-    return {
-      result: result.toString(),
-      time: performance.now() - ts,
-    };
-  }
+export const partOne: Runner = async (dataSetFlag: string): Promise<Result> => {
+  const rawInput = dataSetFlag === "example" ? exampleInput : input;
+  const ts = performance.now();
+  const data = parseData(rawInput, false);
+  // Begin Solution
+  const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
+  // End Solution
+  return {
+    result: result.toString(),
+    time: performance.now() - ts,
+  };
+};
 
-  async partTwo(dataSetFlag: string): Promise<Result> {
-    const rawInput = dataSetFlag === "example" ? exampleInput : input;
-    const ts = performance.now();
-    const data = parseData(rawInput, true);
-    // Begin Solution
-    const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
-    // End Solution
-    return {
-      result: result.toString(),
-      time: performance.now() - ts,
-    };
-  }
-
-  name = "Day 3";
-}
+export const partTwo: Runner = async (dataSetFlag: string): Promise<Result> => {
+  const rawInput = dataSetFlag === "example" ? exampleInput : input;
+  const ts = performance.now();
+  const data = parseData(rawInput, true);
+  // Begin Solution
+  const result = data.reduce((acc, { a, b }) => acc + a * b, 0);
+  // End Solution
+  return {
+    result: result.toString(),
+    time: performance.now() - ts,
+  };
+};
