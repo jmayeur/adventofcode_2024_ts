@@ -32,6 +32,7 @@
         "prebuild": "npm run lint",
         "build": "tsc -p tsconfig.json",
         "get-results": "npm run build && npm start",
+        "tsx-it": "npx tsx ./src/index.ts",
         "build:watch": "tsc -w -p tsconfig.json",
         "lint": "eslint-output src/**/*.ts",
         "lint-fix": "eslint src/**/*.ts --fix",

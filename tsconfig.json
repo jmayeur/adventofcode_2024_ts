@@ -29,9 +29,6 @@
         "strict": true
     },
     "ts-node": {
-        "esm": true,
-        "compilerOptions": {
-            "module": "CommonJS"
-        }
+        "esm": true
     }
 }
