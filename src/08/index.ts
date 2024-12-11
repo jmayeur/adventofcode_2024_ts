@@ -1,4 +1,5 @@
 import { Runner } from "../types/runner";
+import { Coordinate } from "../types/Coordinate";
 import { input, exampleInput } from "./data/index";
 import { Result } from "../types/result";
 
@@ -8,10 +9,6 @@ type Antenna = {
   type: string;
 };
 
-type Coordinate = {
-  x: number;
-  y: number;
-};
 
 const parseData = (rawData: string): string[][] => {
   return rawData.split("\n").map((row) => row.split(""));
