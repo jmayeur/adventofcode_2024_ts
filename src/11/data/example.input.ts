@@ -1,1 +1,1 @@
-export const exampleInput = ``;
+export const exampleInput = `125 17`;
